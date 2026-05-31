@@ -34,6 +34,11 @@ const AdminAuditLogsPage = lazy(() =>
     default: module.AdminAuditLogsPage,
   })),
 );
+const AdminDictionariesPage = lazy(() =>
+  import("@/pages/admin/AdminDictionariesPage").then((module) => ({
+    default: module.AdminDictionariesPage,
+  })),
+);
 const AdminFilesPage = lazy(() =>
   import("@/pages/admin/AdminFilesPage").then((module) => ({
     default: module.AdminFilesPage,
@@ -130,6 +135,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute permission="setting:list">
             {page(<AdminSettingsPage />)}
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/dictionaries",
+        element: (
+          <ProtectedRoute permission="dictionary:list">
+            {page(<AdminDictionariesPage />)}
           </ProtectedRoute>
         ),
       },

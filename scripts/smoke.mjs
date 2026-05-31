@@ -10,6 +10,7 @@ const requiredRoutes = [
   ["/admin/roles", "角色管理"],
   ["/admin/permissions", "权限字典"],
   ["/admin/settings", "系统设置"],
+  ["/admin/dictionaries", "数据字典"],
   ["/admin/audit-logs", "审计日志"],
   ["/admin/files", "文件管理"],
   ["/examples/table", "表格示例"],

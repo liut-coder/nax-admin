@@ -69,6 +69,31 @@ export interface FileRecord {
   createdAt: string;
 }
 
+export interface DictionaryItemRecord {
+  id: string;
+  dictionaryId: string;
+  label: string;
+  value: string;
+  color?: string | null;
+  sortOrder: number;
+  isEnabled: boolean;
+  meta: Record<string, unknown>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DictionaryRecord {
+  id: string;
+  key: string;
+  name: string;
+  description: string;
+  isSystem: boolean;
+  isEnabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+  items?: DictionaryItemRecord[];
+}
+
 export interface CreateUserPayload {
   email: string;
   username: string;
@@ -102,4 +127,35 @@ export interface UpdateRolePayload {
 export interface UpdateSettingPayload {
   value: unknown;
   description?: string;
+}
+
+export interface CreateDictionaryPayload {
+  key: string;
+  name: string;
+  description: string;
+  isEnabled: boolean;
+}
+
+export interface UpdateDictionaryPayload {
+  name?: string;
+  description?: string;
+  isEnabled?: boolean;
+}
+
+export interface CreateDictionaryItemPayload {
+  label: string;
+  value: string;
+  color?: string | null;
+  sortOrder: number;
+  isEnabled: boolean;
+  meta: Record<string, unknown>;
+}
+
+export interface UpdateDictionaryItemPayload {
+  label?: string;
+  value?: string;
+  color?: string | null;
+  sortOrder?: number;
+  isEnabled?: boolean;
+  meta?: Record<string, unknown>;
 }

@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
@@ -19,8 +20,17 @@ export function FormDrawer({
   footer,
   onClose,
 }: FormDrawerProps) {
+  const [mounted, setMounted] = useState(open);
+
+  useEffect(() => {
+    if (open) setMounted(true);
+  }, [open]);
+
+  if (!mounted && !open) return null;
+
   return (
     <div
+      aria-hidden={!open}
       className={cn(
         "fixed inset-0 z-50 transition",
         open ? "pointer-events-auto" : "pointer-events-none",
@@ -38,6 +48,9 @@ export function FormDrawer({
           "absolute right-0 top-0 flex h-full w-[min(92vw,520px)] flex-col border-l bg-surface shadow-xl transition-transform",
           open ? "translate-x-0" : "translate-x-full",
         )}
+        onTransitionEnd={() => {
+          if (!open) setMounted(false);
+        }}
       >
         <div className="flex items-start justify-between border-b px-5 py-4">
           <div>

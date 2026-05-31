@@ -4,6 +4,7 @@ import {
   Database,
   FileText,
   KeyRound,
+  ListTree,
   Settings,
   ShieldCheck,
   Users,
@@ -20,6 +21,7 @@ import {
   listFiles,
   listPermissions,
   listSettings,
+  dictionariesApi,
   rolesApi,
   usersApi,
 } from "@/features/admin/api";
@@ -41,6 +43,10 @@ export function DashboardPage() {
   const permissionsQuery = useQuery({
     queryKey: ["admin", "dashboard", "permissions"],
     queryFn: () => listPermissions({ page: 1, pageSize: 1 }),
+  });
+  const dictionariesQuery = useQuery({
+    queryKey: ["admin", "dashboard", "dictionaries"],
+    queryFn: () => dictionariesApi.list({ page: 1, pageSize: 1 }),
   });
   const settingsQuery = useQuery({
     queryKey: ["admin", "dashboard", "settings"],
@@ -71,7 +77,7 @@ export function DashboardPage() {
         }
       />
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <StatCard
           label="用户"
           value={usersQuery.data?.pagination.total ?? "-"}
@@ -89,6 +95,12 @@ export function DashboardPage() {
           value={permissionsQuery.data?.pagination.total ?? "-"}
           hint="GET /permissions"
           icon={<KeyRound className="h-6 w-6" />}
+        />
+        <StatCard
+          label="字典"
+          value={dictionariesQuery.data?.pagination.total ?? "-"}
+          hint="GET /dictionaries"
+          icon={<ListTree className="h-6 w-6" />}
         />
         <StatCard
           label="文件"
@@ -170,6 +182,7 @@ export function DashboardPage() {
           {[
             "认证登录：POST /auth/login，401 自动退出，refresh 自动续签",
             "用户角色：用户 CRUD、角色 CRUD、权限勾选",
+            "数据字典：字典 CRUD、条目维护、中文友好显示",
             "配置审计：系统设置更新、审计日志查询",
             "文件上传：multipart 上传和文件列表",
           ].map((item, index) => (

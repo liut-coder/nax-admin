@@ -18,6 +18,7 @@
 - Roles: list, create, edit, delete, permission binding
 - Permissions: read-only permission dictionary
 - Settings: list and update typed setting values
+- Data dictionaries: dictionary CRUD, item CRUD, localized display labels
 - Audit logs: list and filter audit records
 - Files: list and upload files
 
@@ -29,6 +30,7 @@
 - `/admin/roles`
 - `/admin/permissions`
 - `/admin/settings`
+- `/admin/dictionaries`
 - `/admin/audit-logs`
 - `/admin/files`
 - `/examples/table`
@@ -115,6 +117,7 @@ The smoke test verifies login and these reusable routes:
 - `/admin/roles`
 - `/admin/permissions`
 - `/admin/settings`
+- `/admin/dictionaries`
 - `/admin/audit-logs`
 - `/admin/files`
 - `/examples/table`
